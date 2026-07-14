@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leave Management</title>
+    <link rel="stylesheet" href="css/style.css">
+   
+</head>
+
+<body>
+
+<h2>Adama City Leave Request</h2>
+
+<form id="leaveForm">
+
+    <label>Employee ID</label><br>
+    <input type="text" id="employee_id" required>
+
+    <br><br>
+
+    <label>Leave Type</label><br>
+    <select id="leave_type">
+        <option value="Annual">Annual Leave</option>
+        <option value="Sick">Sick Leave</option>
+        <option value="Emergency">Emergency Leave</option>
+    </select>
+
+    <br><br>
+
+    <label>Start Date</label><br>
+    <input type="date" id="start_date" required>
+
+    <br><br>
+
+    <label>End Date</label><br>
+    <input type="date" id="end_date" required>
+
+    <br><br>
+
+    <label>Reason</label><br>
+    <textarea id="reason"></textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Submit Leave
+    </button>
+
+</form>
+
+
+<script>
+
+document
+.getElementById("leaveForm")
+.addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+
+    const data = {
+
+        employee_id: document.getElementById("employee_id").value,
+
+        leave_type: document.getElementById("leave_type").value,
+
+        start_date: document.getElementById("start_date").value,
+
+        end_date: document.getElementById("end_date").value,
+
+        reason: document.getElementById("reason").value
+
+    };
+
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:5000/api/leave",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(data)
+            }
+        );
+
+
+        const result = await response.json();
+
+
+        if(result.success){
+
+            alert("Leave request submitted successfully");
+
+            document.getElementById("leaveForm").reset();
+
+        } else {
+
+            alert(result.message);
+
+        }
+
+
+    } catch(error){
+
+        console.log(error);
+
+        alert("Server connection error");
+
+    }
+
+
+});
+
+</script>
+
+
+</body>
+</html>

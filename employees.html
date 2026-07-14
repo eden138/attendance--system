@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Management</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #f4f6f9;
+        }
+
+        .container {
+            width: 500px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Add Employee</h2>
+
+    <input id="employee_id" placeholder="Employee ID">
+
+    <input id="name" placeholder="Employee Name">
+
+    <input id="department" placeholder="Department">
+
+    <input id="position" placeholder="Position">
+
+    <input id="status" placeholder="Status">
+
+    <button onclick="addEmployee()">
+        Add Employee
+    </button>
+
+
+    <h2>Employee List</h2>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Position</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody id="employeeList">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<script>
+
+function addEmployee(){
+
+    const employee = {
+
+        employee_id:
+        document.getElementById("employee_id").value,
+
+        name:
+        document.getElementById("name").value,
+
+        department:
+        document.getElementById("department").value,
+
+        position:
+        document.getElementById("position").value,
+
+        status:
+        document.getElementById("status").value
+    };
+
+
+    fetch("http://localhost:3000/employees", {
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body: JSON.stringify(employee)
+
+    })
+
+    .then(res => res.text())
+
+    .then(data => {
+
+        alert(data);
+
+        loadEmployees();
+
+    });
+
+}
+
+
+
+function loadEmployees(){
+
+    fetch("http://localhost:3000/employees")
+
+    .then(res => res.json())
+
+    .then(data => {
+
+
+        let rows = "";
+
+
+        data.forEach(emp => {
+
+            rows += 
+
+            <tr>
+
+            <td>${emp.employee_id}</td>
+
+            <td>${emp.name}</td>
+
+            <td>${emp.department}</td>
+
+            <td>${emp.position}</td>
+
+            <td>${emp.status}</td>
+
+            </tr>
+
+            ;
+
+        });
+
+
+        document.getElementById("employeeList").innerHTML = rows;
+
+
+    });
+
+}
+
+
+loadEmployees();
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Settings - Adama City HR System</title>
+
+<link rel="stylesheet" href="css/setting.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<div class="sidebar">
+
+<h2>Adama City</h2>
+<p>HR System</p>
+
+
+<ul>
+
+<li onclick="goDashboard()">
+<i class="fa fa-home"></i>
+Dashboard
+</li>
+
+
+<li onclick="goAttendance()">
+<i class="fa fa-calendar-check"></i>
+Attendance
+</li>
+
+
+<li onclick="goEmployees()">
+<i class="fa fa-users"></i>
+Employees
+</li>
+
+
+<li onclick="goReports()">
+<i class="fa fa-file"></i>
+Reports
+</li>
+
+
+<li class="active">
+<i class="fa fa-cog"></i>
+Settings
+</li>
+
+
+<li onclick="logout()">
+<i class="fa fa-sign-out"></i>
+Logout
+</li>
+
+
+</ul>
+
+</div>
+
+
+
+
+
+<div class="main">
+
+
+<div class="topbar">
+
+<h2>
+System Settings
+</h2>
+
+</div>
+
+
+
+
+<div class="settings-container">
+
+
+<div class="setting-card">
+
+<h3>
+<i class="fa fa-face-smile"></i>
+Face Recognition Settings
+</h3>
+
+
+<label>
+Face Recognition Status
+</label>
+
+
+<select>
+
+<option>
+Enabled
+</option>
+
+<option>
+Disabled
+</option>
+
+</select>
+
+
+
+<label>
+Recognition Accuracy
+</label>
+
+
+<input type="range" min="50" max="100" value="90">
+
+
+</div>
+
+
+
+
+
+<div class="setting-card">
+
+
+<h3>
+<i class="fa fa-wifi"></i>
+Network Settings
+</h3>
+
+
+<label>
+Allowed Wi-Fi Name
+</label>
+
+
+<input 
+type="text"
+placeholder="Adama City Administration Wi-Fi">
+
+
+
+<label>
+Allowed IP Range
+</label>
+
+
+<input
+type="text"
+placeholder="192.168.1.x">
+
+
+</div>
+
+
+
+
+
+<div class="setting-card">
+
+
+<h3>
+<i class="fa fa-volume-high"></i>
+Accessibility
+</h3>
+
+
+
+<label>
+
+<input type="checkbox">
+
+Enable Voice Assistance
+
+</label>
+
+
+<br>
+
+
+<label>
+
+<input type="checkbox">
+
+Large Text Mode
+
+</label>
+
+
+<br>
+
+
+<label>
+
+<input type="checkbox">
+
+High Contrast Mode
+
+</label>
+
+
+</div>
+
+
+
+
+
+<div class="setting-card">
+
+
+<h3>
+<i class="fa fa-user-shield"></i>
+Admin Account
+</h3>
+
+
+<input
+type="text"
+placeholder="Admin Username">
+
+
+<input
+type="password"
+placeholder="New Password">
+
+
+<button>
+Save Settings
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+<script src="js/setting.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adama City Administration - Attendance & HR System</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="left-side">
+        <h1>Adama City Administration</h1>
+        <h2>Attendance & HR Management System</h2>
+ 
+        <p>
+            Secure Employee Attendance using Face Recognition
+        </p>
+
+        <img src="images/logo.png" alt="Logo">
+    </div>
+
+    <div class="right-side">
+
+        <div class="login-box">
+
+            <h2>Welcome</h2>
+            <p>Please login to continue</p>
+
+            <form id="loginForm">
+
+                <div class="input-box">
+                    <i class="fa fa-user"></i>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Username"
+                        required>
+                </div>
+
+                <div class="input-box">
+                    <i class="fa fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        required>
+
+                    <i class="fa fa-eye"
+                       id="togglePassword"></i>
+                </div>
+                
+
+                <div class="remember">
+
+                    <label>
+                        <input type="checkbox">
+                        Remember Me
+                    </label>
+
+                    <a href="#">Forgot Password?</a>
+
+                </div>
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <div class="footer">
+                © 2026 Adama City Administration
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/login.js"></script>
+<script>
+document.querySelector("form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const response = await fetch("http://localhost:5000/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert("Login Successful");
+            window.location.href = "dashboard.html";
+        } else {
+            alert(data.message);
+        }
+    } catch (error) {
+        alert("Cannot connect to the server.");
+        console.error(error);
+    }
+});
+</script>
+
+</body>
+</html>

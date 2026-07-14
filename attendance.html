@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Attendance - Adama City HR System</title>
+
+<link rel="stylesheet" href="css/attendance.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<div class="sidebar">
+
+    <h2>Adama City</h2>
+    <h2>Attendance Management</h2>
+
+<form id="attendanceForm">
+    <input type="text" id="employeeId" placeholder="Employee ID" required>
+
+    <input type="date" id="date" required>
+
+    <select id="status">
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+        <option value="Late">Late</option>
+    </select>
+
+    <button type="submit">Save Attendance</button>
+    
+</form>
+
+<div id="message"></div>
+    <p>HR System</p>
+
+
+    <ul>
+
+        <li onclick="goDashboard()">
+            <i class="fa fa-home"></i>
+            Dashboard
+        </li>
+
+        <li class="active">
+            <i class="fa fa-calendar-check"></i>
+            Attendance
+        </li>
+
+        <li onclick="goEmployees()">
+            <i class="fa fa-users"></i>
+            Employees
+        </li>
+
+        <li>
+            <i class="fa fa-file"></i>
+            Reports
+        </li>
+
+        <li>
+            <i class="fa fa-cog"></i>
+            Settings
+        </li>
+
+        <li onclick="logout()">
+            <i class="fa fa-sign-out"></i>
+            Logout
+        </li>
+
+    </ul>
+
+</div>
+
+
+
+<div class="main">
+
+
+<div class="topbar">
+
+<h2>
+Face Recognition Attendance
+</h2>
+
+
+<div class="time">
+<i class="fa fa-clock"></i>
+<span id="clock"></span>
+</div>
+
+
+</div>
+
+
+
+<div class="attendance-container">
+
+
+<!-- Camera Section -->
+
+<div class="camera-box">
+
+<h3>
+Camera Scanner
+</h3>
+
+
+<div class="camera">
+
+<i class="fa fa-camera"></i>
+
+<p>
+Camera will appear here
+</p>
+
+</div>
+
+
+<button id="startCamera">
+<i class="fa fa-video"></i>
+Start Camera
+</button>
+
+
+</div>
+
+
+
+
+
+<!-- Employee Result -->
+
+<div class="result-box">
+
+
+<h3>
+Attendance Result
+</h3>
+
+
+<div class="employee-card">
+
+
+<img src="i love adama.jpg.png">
+
+
+<div>
+
+<h2 id="employeeName">
+Unknown Person
+</h2>
+
+<p>
+ID: <span id="employeeID">---</span>
+</p>
+
+
+<p>
+Department:
+<span id="department">---</span>
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="status waiting">
+
+<i class="fa fa-circle"></i>
+
+Waiting for face recognition...
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="history">
+
+
+<h2>
+Today's Attendance
+</h2>
+
+
+<table>
+
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Time</th>
+<th>Status</th>
+
+</tr>
+
+
+
+<tr>
+
+<td>001</td>
+<td>Abebe Kebede</td>
+<td>08:10 AM</td>
+<td class="present">
+Present
+</td>
+
+</tr>
+
+
+</table>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+<script src="js/attendance.js"></script>
+<script>
+document.getElementById("attendanceForm").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const employee_id = document.getElementById("employeeId").value;
+    const attendance_date = document.getElementById("date").value;
+    const status = document.getElementById("status").value;
+
+
+    const response = await fetch("http://localhost:5000/api/attendance", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            employee_id,
+            attendance_date,
+            status
+        })
+
+    });
+
+
+    const data = await response.json();
+
+    if(data.success){
+        alert("Attendance Saved Successfully");
+    } else {
+        alert("Error Saving Attendance");
+    }
+
+});
+</script>
+
+
+</body>
+
+</html>

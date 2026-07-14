@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard</title></head>
+<body style="font-family: sans-serif; padding: 50px;">
+    <h2 id="welcomeMsg">Welcome</h2>
+    <div style="background: #e9ecef; padding: 20px; border-radius: 10px;">
+        <h3>Registry Status: <span style="color: green;">Present</span></h3>
+    </div>
+    <br>
+    <button onclick="logout()">Lock & Exit</button>
+
+    <script>
+        const user = localStorage.getItem('loggedInUser');
+        if (!user) {
+            window.location.href = "index.html";
+        } else {
+            document.getElementById('welcomeMsg').innerText = "Welcome back, " + user;
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
